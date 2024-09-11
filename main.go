@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	fmt.Sprintf("Hello, Structure")
+	fmt.Println("Hello, Struct")
 }
