@@ -5,8 +5,6 @@
 
 package array
 
-import "errors"
-
 type Array struct {
 	initialCapacity int
 	filledCapacity  int
@@ -41,7 +39,7 @@ func (arr *Array) Insert(item int) {
 // Time complexity: O(n) (due to element shifting)
 func (arr *Array) RemoveAt(index int) error {
 	if index < 0 || index >= len(arr.items) {
-		errors.New("index out of range")
+		panic("index out of range")
 	}
 
 	for i := index; i < len(arr.items)-1; i++ {
