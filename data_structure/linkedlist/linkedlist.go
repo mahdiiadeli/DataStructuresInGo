@@ -1,4 +1,11 @@
+// Package linkedlist provides a simple implementation of a singly linked list data structure.
+// It supports operations to manage and manipulate the list, including adding and removing elements,
+// searching for values, and converting the list to an array. The linked list dynamically grows
+// or shrinks as needed, with efficient insertions and deletions at the beginning and end.
+
 package linkedlist
+
+import "fmt"
 
 type LinkedList struct {
 	first *Node
@@ -29,7 +36,6 @@ func (ls *LinkedList) isEmpty() bool {
 
 // AddLast adds a node with the given value at the end of the list
 // Time Complexity: O(1)
-// This operation involves updating the last node's next pointer and last pointer, or setting both pointers if the list is empty.
 func (ls *LinkedList) AddLast(value int) {
 	newNode := newNode(value)
 	if ls.isEmpty() {
@@ -45,7 +51,6 @@ func (ls *LinkedList) AddLast(value int) {
 
 // AddFirst adds a node with the given value at the beginning of the list
 // Time Complexity: O(1)
-// This operation always involves setting the new node's next pointer to the current first node and updating the first pointer.
 func (ls *LinkedList) AddFirst(value int) {
 	newNode := newNode(value)
 	if ls.isEmpty() {
@@ -61,7 +66,6 @@ func (ls *LinkedList) AddFirst(value int) {
 
 // RemoveLast removes the last node from the list
 // Time Complexity: O(n)
-// This operation requires traversing the list to find the second-to-last node, then updating its next pointer to nil and the last pointer.
 func (ls *LinkedList) RemoveLast() {
 	if ls.isEmpty() || ls.first == ls.last {
 		ls.first = nil
@@ -82,7 +86,6 @@ func (ls *LinkedList) RemoveLast() {
 
 // RemoveFirst removes the first node from the list
 // Time Complexity: O(1)
-// This operation involves updating the first pointer to the next node, and if necessary, resetting the last pointer if the list becomes empty.
 func (ls *LinkedList) RemoveFirst() {
 	if ls.isEmpty() || ls.first == ls.last {
 		ls.first = nil
@@ -99,7 +102,6 @@ func (ls *LinkedList) RemoveFirst() {
 
 // IndexOf returns the index of the first occurrence of the given value, or -1 if not found
 // Time Complexity: O(n)
-// This operation involves traversing the list from the beginning to find the node with the given value.
 func (ls *LinkedList) IndexOf(value int) int {
 	index := 0
 	currentNode := ls.first
@@ -116,21 +118,18 @@ func (ls *LinkedList) IndexOf(value int) int {
 
 // Contains checks if a value is present in the linked list
 // Time Complexity: O(n)
-// This operation involves scanning through the linked list to find the node with the specified value.
 func (ls *LinkedList) Contains(value int) bool {
 	return ls.IndexOf(value) != -1
 }
 
 // Size returns the number of elements in the linked list
 // Time Complexity: O(1)
-// This operation retrieves the size of the linked list from a stored attribute.
 func (ls *LinkedList) Size() int {
 	return ls.size
 }
 
 // ToArray converts the linked list to a slice of integers
 // Time Complexity: O(n)
-// This operation involves traversing the entire linked list to copy each node's value into a new slice.
 func (ls *LinkedList) ToArray() []int {
 	arr := make([]int, ls.size, ls.size)
 	currentNode := ls.first
@@ -143,4 +142,53 @@ func (ls *LinkedList) ToArray() []int {
 	}
 
 	return arr
+}
+
+// Reverse reverses the order of nodes in the linked list.
+// Time Complexity: O(n) 
+func (ls *LinkedList) Reverse() {
+	if ls.isEmpty() || ls.first.next == nil {
+		return
+	}
+
+	currentNode := ls.first
+	var previousNode *Node
+
+	for currentNode != nil {
+		nextNode := currentNode.next
+		currentNode.next = previousNode
+		previousNode = currentNode
+		currentNode = nextNode
+	}
+
+	ls.last = ls.first
+	ls.first = previousNode
+	ls.last.next= nil
+}
+
+// GetKthFromTheEnd returns the value of the k-th node from the end of the linked list.
+// Time Complexity: O(n)
+func (ls *LinkedList) GetKthFromTheEnd(k int) int {
+	if k <= 0 {
+		panic("K must be greater than 0")
+	}
+	
+	lead := ls.first
+	follow := ls.first
+
+	for i := 0; i < k -1 ; i++ {
+		fmt.Println(follow)
+		fmt.Println(follow.next)
+		follow = follow.next
+		if follow == nil {
+			panic("K out of range")
+		}
+	}
+
+	for follow != ls.last {
+		lead = lead.next
+		follow = follow.next
+	}
+
+	return lead.value
 }
