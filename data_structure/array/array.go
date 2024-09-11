@@ -23,7 +23,6 @@ func NewArray(initialCapacity int) *Array {
 
 // Insert adds a new item to the array, resizing if necessary.
 // Time complexity (amortized): O(1)
-// Worst-case time complexity (when resizing): O(n)
 func (arr *Array) Insert(item int) {
 	if arr.filledCapacity == len(arr.items) {
 		newItems := make([]int, len(arr.items)*2)
