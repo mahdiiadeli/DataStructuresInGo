@@ -1,9 +1,9 @@
-// Package array provides a simple dynamic array data structure implementation.
+// Package structures provides a simple dynamic array data structure implementation.
 // It supports inserting elements with automatic resizing, removing elements by index,
 // searching for elements, and printing the current array contents.
 // The array dynamically grows in size when needed, but does not shrink automatically.
 
-package array
+package structures
 
 type Array struct {
 	initialCapacity int
@@ -12,7 +12,6 @@ type Array struct {
 }
 
 // NewArray initializes a new array with a given initial capacity.
-// Time complexity: O(1)
 func NewArray(initialCapacity int) *Array {
 	return &Array{
 		initialCapacity: initialCapacity,

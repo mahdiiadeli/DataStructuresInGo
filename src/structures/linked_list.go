@@ -3,7 +3,7 @@
 // searching for values, and converting the list to an array. The linked list dynamically grows
 // or shrinks as needed, with efficient insertions and deletions at the beginning and end.
 
-package linkedlist
+package structures
 
 import "fmt"
 
@@ -131,7 +131,7 @@ func (ls *LinkedList) Size() int {
 // ToArray converts the linked list to a slice of integers
 // Time Complexity: O(n)
 func (ls *LinkedList) ToArray() []int {
-	arr := make([]int, ls.size, ls.size)
+	arr := make([]int, ls.size)
 	currentNode := ls.first
 	arrIndex := 0
 
