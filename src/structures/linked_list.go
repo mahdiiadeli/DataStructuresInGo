@@ -5,8 +5,6 @@
 
 package structures
 
-import "fmt"
-
 type LinkedList struct {
 	first *Node
 	last  *Node
@@ -177,8 +175,6 @@ func (ls *LinkedList) GetKthFromTheEnd(k int) int {
 	follow := ls.first
 
 	for i := 0; i < k -1 ; i++ {
-		fmt.Println(follow)
-		fmt.Println(follow.next)
 		follow = follow.next
 		if follow == nil {
 			panic("K out of range")
